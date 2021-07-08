@@ -1,0 +1,122 @@
+<svg:g [attr.transform]="svgGroupTransform" 
+       class="nodeClickGroup" 
+       matTooltip="{{label}}" 
+       matTooltipClass="nodeTooltip"
+       >
+    <g *ngIf="showImage; else displayNode">
+        <defs *ngIf="showImage">
+            <pattern [attr.id]="nodeId" x="0%" y="0%" height="100%" width="100%"
+                     viewBox="0 0 500 500">
+              <image x="0%" y="0%" [attr.width]="imageScale.width" [attr.height]="imageScale.height" [attr.xlink:href]="imageUri"></image>
+            </pattern>
+          </defs>
+          <svg:circle class="node" 
+                     [className]="hasImageShrinkFactor ? 'nodeImageBorder' : ''"
+                      id="svgNodeImageBackground"
+                      [attr.x]="x" 
+                      [attr.y]="y"  
+                      [attr.r]="r" 
+                      [attr.fill]="imageBg" 
+          />
+          <svg:circle class="node" 
+                      [attr.x]="x" 
+                      [attr.y]="y"  
+                      [attr.r]="imageRadius" 
+                      [attr.fill]="fill" 
+          />
+          <svg:text *ngIf="isClass" [attr.x]="r" [attr.y]="r" alignment-baseline="bottom" class="classText">
+			C
+         </svg:text>
+         
+         <g *ngIf="showLabelOverPicture" class="labelGroup" [attr.transform]="labelBg.transform">
+            <rect alignment-baseline="central" class="node_label_bg" 
+            [attr.width]="labelBg.width" 
+            [attr.height]="labelBg.height" 
+            [attr.x]="-labelBg.width/2"
+            [attr.y]="-labelBg.height/1.25"
+            [attr.rx]="labelBg.radius"
+            [attr.ry]="labelBg.radius"></rect>
+            <svg:text class="node_label" [style.font-size]="fontSize" text-anchor="middle" alignment-baseline="central">
+                <tspan >{{ shortLabel }}</tspan>
+            </svg:text> 
+        </g>
+    </g>
+    <ng-template #displayNode>
+        <g>
+            <svg:circle class="node" 
+                [attr.x]="x" 
+                [attr.y]="y"  
+                [attr.r]="r" 
+                [attr.fill]="fill"  />
+            <svg:circle *ngIf="isNodeHightlighted && !showImage" class="highlight" 
+                    [attr.x]="x" 
+                    [attr.y]="y"  
+                    [attr.r]="r" 
+            />
+
+        <g class="labelGroup" [attr.transform]="labelBg.transform">
+            <rect alignment-baseline="central" class="node_label_bg" 
+            [attr.width]="labelBg.width" 
+            [attr.height]="labelBg.height" 
+            [attr.x]="-labelBg.width/2"
+            [attr.y]="-labelBg.height/1.25"
+            [attr.rx]="labelBg.radius"
+            [attr.ry]="labelBg.radius"></rect>
+            <svg:text class="node_label" [style.font-size]="fontSize" text-anchor="middle" alignment-baseline="central">
+                <tspan >{{ shortLabel }}</tspan>
+            </svg:text> 
+        </g>
+    </g>
+    </ng-template>
+    <svg:circle *ngIf="isNodeHightlighted && showImage" class="highlight" 
+            [attr.x]="x" 
+            [attr.y]="y"  
+            [attr.r]="r" 
+          />
+    <g class="nodeButtons">
+        
+        <g id="nodeBt_topRight">
+            <title>Fetch Incoming Data</title>
+            <path
+                 class="menuPath"
+                 id="menuPathTopRight"
+                 [attr.d]="menuPath"
+            ></path>
+       
+            <image [attr.x]="menuIcon.x" [attr.y]="menuIcon.y" [attr.width]="menuIcon.size" [attr.height]="menuIcon.size" href="./assets/plus.svg" />
+        </g>
+    
+        <g id="nodeBt_bottomRight" transform="rotate(90)">
+            <title>Remove Node</title>
+            <path
+                 class="menuPath"
+                 id="menuPathTopRight"
+                 [attr.d]="menuPath"
+              />
+              <image [attr.x]="menuIcon.x" [attr.y]="menuIcon.y" [attr.width]="menuIcon.size" [attr.height]="menuIcon.size" href="./assets/trashNew.svg" />
+        </g>
+    
+        <g id="nodeBt_bottomLeft" transform="rotate(180)">
+            <title>not implemented</title>
+            <path
+                 class="menuPath"
+                 id="menuPathTopRight"
+                 [attr.d]="menuPath"
+              />
+
+              <image [attr.x]="menuIcon.x" [attr.y]="menuIcon.y" [attr.width]="menuIcon.size" [attr.height]="menuIcon.size" href="./assets/table.svg" />
+        </g>
+    
+        <g id="nodeBt_topLeft" transform="rotate(270)">
+            <title>Hide Node</title>
+            <path
+                 class="menuPath"
+                 id="menuPathTopRight"
+                 [attr.d]="menuPath"
+              />
+         
+            <image [attr.x]="menuIcon.x" [attr.y]="menuIcon.y" [attr.width]="menuIcon.size" [attr.height]="menuIcon.size" href="./assets/eyeNew.svg" />
+        </g>
+    </g>
+
+</svg:g>

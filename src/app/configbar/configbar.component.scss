@@ -1,0 +1,224 @@
+@import "../../assets/scss/variables.scss";
+@import "../../assets/scss/buttons.scss";
+
+#div_configbar-container{
+    background-color: $background;
+    color: $textColor;
+    position: absolute;
+    top: 14em;
+    right: -20em;
+    width: 20em;
+    height: 30em;
+}
+
+
+#div_control{
+    transform: rotate(-90deg);
+    position: absolute;
+    left: -16em;
+    top: 13.9em;
+    width: 30em;
+
+    #btn_tab-node-link{
+        width: 24%;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    #btn_tab-force{
+        width: 23%;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    #btn_tab-graphGenerator{
+        width: 28%;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+    
+    #btn_tab-settings{
+        width: 25%;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+  }
+
+#div_configs {
+    padding: 0.5em;
+    padding-top: 2em;
+    text-align: center;
+    overflow-y: auto;
+    height: 100%;
+   
+    @include scrollbars(7px, $titleBarHover, $background);
+}
+
+.switch-button{
+    color: $textColor;
+}
+
+.switch-button:hover {
+    background-color: lightblue;
+    color: $background;
+}
+
+.selected{
+    color: $background;
+}
+
+#div_configbar-container.slideTransitionClose {
+    -webkit-transition: 1s;
+    -moz-transition: 1s;
+    -ms-transition: 1s;
+    -o-transition: 1s;
+    transition: 1s;
+    right: -20em !important;
+}
+
+#div_configbar-container.slideTransitionOpen {
+    -webkit-transition: 1s;
+    -moz-transition: 1s;
+    -ms-transition: 1s;
+    -o-transition: 1s;
+    transition: 1s;
+    right: 0em !important;
+}
+
+
+#div_node-link-bt-container{
+    align-items: center;
+    padding: 2em;
+}
+
+.sli{
+    width: 13em;
+}
+
+#div_charge-container, #div_distance-container, #div_strength-container{
+    float: right;
+}
+
+.sliderlabel {
+    max-width:30%
+}
+
+
+.lbl{
+    text-align: left;
+    margin: 0;
+    padding: 0;
+    width: 30%
+}
+
+#div_graphGenerator-container{
+    height: 15em;
+    width: 90%;
+}
+
+#txta_inputGraph{
+    width: 294px;
+    height: 358px;
+}
+
+#div_graphgenerator-container{
+display:block;
+ }
+
+#div_node-weight-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: .5em;
+    .innerContainer {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    #settings_vertical-line {
+        border: 1px solid grey;
+    }
+    p {
+        border-bottom: 2px solid grey;
+    }
+}
+
+#div_dynamic-target-radio-container{
+   display: flex;
+   p{
+    width:100%;
+   }
+}
+
+.material-icons{
+    background-color: green($color: #0800ff);
+}
+
+.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+    background-color: $sliderBackColor;
+}
+
+.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+    background-color: $plotButtonColor;
+}
+
+::ng-deep .mat-accent .mat-slider-thumb {
+    background-color: $plotButtonColor;
+} 
+
+::ng-deep .mat-accent .mat-slider-track-fill {
+    background-color: $plotButtonColor;
+} 
+
+::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle{
+    color: $plotButtonColor;
+    background-color: $plotButtonColor ;
+  }
+
+::ng-deep  .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle{
+    border-color:$plotButtonColor; 
+}
+   
+.oval_button{
+    margin:0.5em;
+    width: 10em;
+    height: 3em; 
+    background-color: $plotButtonColor;
+    border: none;
+    color: $textColor;
+    font-weight: bold;
+    border-radius: 2em;
+  }
+
+.oval_button:hover {
+    background-color: $sliderBackColor;
+}
+
+#oval_button:focus {
+    outline: none;
+}
+
+
+::ng-deep .mat-focused .mat-form-field-label {
+    /*change color of label*/
+    color: $textColor !important;
+   }
+  
+   ::ng-deep.mat-form-field-underline {
+    /*change color of underline*/
+    background-color: $textColor !important;
+  } 
+  
+  ::ng-deep.mat-form-field-ripple {
+   /*change color of underline when focused*/
+   background-color: $textColor !important;;
+  }
+
+  ::ng-deep.mat-form-field-label {
+    color: $textColor !important;
+  }

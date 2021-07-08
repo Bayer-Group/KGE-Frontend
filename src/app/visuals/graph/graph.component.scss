@@ -1,0 +1,13 @@
+::ng-deep .tooltip_info{
+    white-space: pre-line;
+    opacity: 0.8 !important;
+    background-color: #4F87D1; // #66ccff;
+    color: black !important;
+    font-size: medium;
+    // min-width: 40em;
+
+}
+
+::ng-deep .ng-star-inserted.cdk-focused.cdk-mouse-focused{
+    outline: none;
+}

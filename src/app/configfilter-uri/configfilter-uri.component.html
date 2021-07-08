@@ -1,0 +1,19 @@
+<div class="wrapper" #configfilterUri>
+  <div class="outside_area" (click)="hidefilter()">
+  </div>
+  <div class="transparent-overlay-window" id="div_setting-window-color">
+    <mat-form-field>
+      <mat-label>Namespaces</mat-label>
+      <mat-select [formControl]="toppings" multiple>
+        <mat-option *ngFor="let namespace of stringList" [value]="namespace">{{namespace}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button class="oval-button" id="btn_set-color" [(colorPicker)]="color"
+      (colorPickerChange)="updateFirestoreColor($event)">
+      set Color
+    </button>
+    <button class="oval-button" id="btn_reset" (click)="resetfilter()">
+      reset
+    </button>
+  </div>
+</div>

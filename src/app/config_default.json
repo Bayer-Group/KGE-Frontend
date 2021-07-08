@@ -1,0 +1,40 @@
+{
+    "simulation_alpha":0.2,
+    "moveClassesToTop": false,
+    "charge": 20000,
+    "charge_min": 0,
+    "charge_max": 50000,
+    "forceCenter": 0.2,
+    "simulationToogle": true,
+    "forceCenter_min": 0.1,
+    "forceCenter_max": 1,
+    "strength": 0.5,
+    "strength_min": 0,
+    "strength_max": 1,
+    "showimage": true,
+    "simulationstate": false,
+
+
+    "outgoing_size": true,
+    "outgoing_color": false,
+    "incoming_size": false,
+    "incoming_color": false,
+    "dynamicTarget": false,
+
+    
+    "nrClippedCharacters" : 15,
+    "nodePadding" : 15,
+    "node_image_circle_padding": 8,
+    "node_image_initial_radius" : 25,
+
+    "nodevisual_offset_x": 5,
+    "nodevisual_offset_y": 5,
+
+    "default_ranking_priority": 1,
+
+    "limit_direct_show": 15,
+    "limit_warning" : 20,
+    "limit_show_list": 200,
+    
+    "character_to_plot_all": "*"
+}

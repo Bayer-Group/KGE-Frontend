@@ -1,0 +1,65 @@
+<h1 mat-dialog-title>Path Configuration
+    <mat-divider class="divider" ></mat-divider>
+</h1>
+<!-- @TODO compare with plotconfig -->
+<div mat-dialog-content>
+    <div id="pathInput">
+      <mat-form-field class="formfield">
+        <mat-label>From</mat-label>
+        <mat-select [(value)]="pathConfig.from">
+          <mat-option *ngFor="let node of pathData.nodes" [value]="node.uri">{{node.data.label}}</mat-option>
+        </mat-select>
+      </mat-form-field>     
+      <mat-form-field>
+        <mat-label>To</mat-label>
+        <mat-select [(value)]="pathConfig.to">
+          <mat-option *ngFor="let node of pathData.nodes" [value]="node.uri">{{node.data.label}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <mat-divider class="divider" ></mat-divider>
+    <div id="settings">
+      <div class="checkboxContainer">
+        <mat-checkbox [(ngModel)]="pathConfig.disableTBox" class="radioButton" >
+            Disable TBox
+        </mat-checkbox>
+        <mat-icon matTooltip="dont show paths that contain any class node" matTooltipPosition="after">info</mat-icon>
+      </div>
+      <div class="checkboxContainer">
+        <mat-checkbox [(ngModel)]="pathConfig.bidirectional" class="radioButton" >
+            Bidirectional
+        </mat-checkbox>
+        <mat-icon matTooltip="Show paths where there is no direct relation between start and end node" matTooltipPosition="after">info</mat-icon>
+      </div>
+      <div class="checkboxContainer">
+        <mat-checkbox [(ngModel)]="pathConfig.shortestPath" class="radioButton" >
+            Shortest Path
+        </mat-checkbox>
+        <mat-icon matTooltip="WARNING: Disabling this option increases the runtime. Display the shortest paths possible" matTooltipPosition="after">info</mat-icon>
+      </div>
+      <mat-divider class="divider subsection" ></mat-divider>
+      <mat-radio-group (change)="resetCheckbox()" [(ngModel)]="selectedSlider">
+        <div [class.selected]="selectedSlider === 'maxPathLength'">
+          <mat-label>Max Path Length</mat-label>
+          <div>
+            <mat-radio-button value="maxPathLength"></mat-radio-button>
+            <mat-slider (input)="updateMaxPathLength($event)" [disabled]="selectedSlider !== 'maxPathLength'" min="0" max="10" step="1" [(ngModel)]="pathConfig.maxPathLength" tickInterval="1"></mat-slider>
+            <span>{{ pathConfig.maxPathLength }}</span>
+          </div>
+        </div>
+        <div>
+          <mat-label>Path Range</mat-label>
+          <div id="rangeSliderContainer">
+            <mat-radio-button value="pathRange"></mat-radio-button>
+            <nouislider id="rangeSlider" [disabled]="selectedSlider !== 'pathRange'" [config]="rangeConfig" [(ngModel)]="pathConfig.pathRange"></nouislider>
+          </div>
+        </div>
+      </mat-radio-group>
+    </div>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onNoClick()">Close</button>
+  <button mat-button (click)="resetPath()">Reset</button>
+  <button mat-button (click)="saveData()" cdkFocusInitial>Go</button>
+</div>

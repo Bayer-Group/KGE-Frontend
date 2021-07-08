@@ -1,0 +1,21 @@
+<nav-bar (changeEvent)="clearData()"></nav-bar>
+<div id="div_flexbox" #flexbox>
+    <div id="div_side-bar-container">
+        <side-bar [class.hidden]="!isOpen" (@toggleSidebar.start)="animStart()" (@toggleSidebar.done)="animEnd($event)"
+            [@toggleSidebar]="isOpen ? 'isOpen': 'closed'" [showLinkVisibility] = "showLinkVisibility" [showSidebar]="showSidebar" id="sidebar"></side-bar>
+            <button mat-raised-button class="switch-button" [class.selected]="isOpen && ControlMethod === 'showSidebar'" (click)="openOrCloseBar('showSidebar');" id="btn_side-bar-info">
+                Info
+            </button>
+            <button mat-raised-button class="switch-button" [class.selected]="isOpen && ControlMethod === 'LinkVisibility'" (click)="openOrCloseBar('LinkVisibility');" id="btn_side-bar-links">
+                Link Visibility
+            </button>
+    </div>
+    <d3-graph id="graph" *ngIf="data" [nodes]="data.nodes" [links]="data.links"></d3-graph>
+</div>
+<config-bar [nodes]="data ? data.nodes : []"></config-bar>
+<filterOverLimitNode></filterOverLimitNode>
+<filterBetweenLimitNode></filterBetweenLimitNode>
+<config-filter *ngIf="showColorFilter" [nodes]="data ? data.nodes : []"></config-filter>
+<config-filter-uri *ngIf="showColorFilterUri" [nodes]="data ? data.nodes : []"></config-filter-uri>
+<config-filter-link *ngIf="showColorFilterLink" [links]="data ? data.links : []"></config-filter-link>
+<progress-layout></progress-layout>

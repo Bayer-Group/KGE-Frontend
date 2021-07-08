@@ -1,0 +1,48 @@
+@import "../../../../assets/scss/variables.scss";
+
+#div-save-container {
+    display: inline-flex;
+    position: absolute;
+    right: 0.5%;
+    top: 1%;
+}
+
+#btn_save-graph {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+
+    background-color: $background !important;
+    margin-right: .25em;
+    color: white;
+}
+
+#btn_open-input {
+    display: flex;
+    justify-content: center;
+    background-color: $background !important;
+    color: white;
+    min-width: .25em !important;
+    width: .25em;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+::ng-deep .mat-icon .arrow{
+    // height:1em !important;
+    font-size:1em !important;
+}
+
+#txt_save-data-file-name {
+    overflow: hidden;
+    width: 20em;
+    transition: width .5s ease-in-out;
+}
+
+.hiddenId {
+    width: 0 !important;
+    border: none;
+}
+
+.rotatedArrow {
+    transform: rotate(180deg);
+}

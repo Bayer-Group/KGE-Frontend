@@ -1,0 +1,47 @@
+{   "showAllFromStart": true,
+    "showLabelOverPicture": false,
+    "showUnlabeledNodeName" : false,
+    "graph": {
+        "node" : {
+            "data" : {
+                "showLabel": [
+                    "https://pid.bayer.com/kos/19050/hasLabel",
+                    "http://www.w3.org/2000/01/rdf-schema#label",
+                    "http://pid.bayer.com/kos/19014/preferredLabel",
+                    "http://pid.bayer.com/kos/19014/fullName",
+                    "http://www.w3.org/2004/02/skos/core#prefLabel"
+                ]
+            },
+            "increaseLabelSize": false,
+            "fetchFutherOutgoingNodesForUris":  [],
+            "nodeImageShrinkFactor": 0.7,
+            "formatUris": {
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#": "rdf",
+                "http://www.w3.org/2000/01/rdf-schema#": "rdfs",
+                "http://www.w3.org/2001/XMLSchema#": "xsd",
+                "http://www.w3.org/2002/07/owl#": "owl"
+            },
+            "userDefinedFormatUris": {          
+                "http://pid.bayer.com/" : "bayerPID"
+            }
+        },
+        "links" : {
+            
+        }
+    },
+    "customCss": [
+        {
+            "attributeName": "#div_shortest-path-input",
+            "attributes": {
+                "display": "none"
+            }
+        },
+        {
+            "attributeName": "body",
+            "attributes": {
+                "background-image": "none",
+                "background-color": "whitesmoke"
+            }
+        }
+    ]
+}

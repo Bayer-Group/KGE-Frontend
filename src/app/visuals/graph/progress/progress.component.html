@@ -1,0 +1,7 @@
+<div class="wrapper" id="div_wrapper-progress" *ngIf="show">
+    <div class="outside_area" id="div_outside-area-progress">
+        <!-- "TODO search" -->
+        <mat-progress-spinner color="accent" mode="indeterminate"></mat-progress-spinner>
+        <button id="btn_abort" (click)="abortRequest()" mat-button>Abort</button>
+    </div>
+</div>

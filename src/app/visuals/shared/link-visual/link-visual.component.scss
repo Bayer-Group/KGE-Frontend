@@ -1,0 +1,52 @@
+@import "../../../../assets/scss/variables.scss";
+
+.path.isType {
+    stroke-linecap: round;
+    stroke-dasharray: 9;
+}
+
+.linkButton {
+    display: none;
+}
+#linkBt_right {
+    fill: #e8e8e8;
+    opacity: 0.8;
+    stroke: black;
+    stroke-width: 1;
+}
+
+#linkBt_left {
+    fill: #e8e8e8;
+    opacity: 0.8;
+    stroke: black;
+    stroke-width: 1;
+}
+
+#linkBt_right:hover {
+    fill: #D30F4B;
+    transition: fill 1s;
+}
+
+#linkBt_left:hover {
+    fill: #eaa2b8;
+    transition: fill 1s;
+}
+
+.path {
+    stroke: black;
+    stroke-width: 1;
+}
+
+.path.highlight {
+    stroke: #00BCFF;
+}
+
+.lineMarker.highlight {
+    fill: #00BCFF;
+}
+
+.arrow.highlight {
+    fill: #00BCFF;
+}
+
+

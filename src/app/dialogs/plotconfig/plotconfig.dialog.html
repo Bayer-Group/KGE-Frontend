@@ -1,0 +1,103 @@
+<h1 mat-dialog-title>Plot Configuration
+    <mat-divider class="divider" ></mat-divider>
+</h1>
+<!-- @TODO compare with pathconfig -->
+<div mat-dialog-content>
+    <h3>Database Configuration</h3>
+    <div id="dbContainer">
+        <mat-form-field>
+            <mat-label>Virtual Graphs</mat-label>
+            <mat-select [formControl]="virtualGraphsControl" multiple>
+                <mat-select-trigger>
+                  {{virtualGraphsControl.value ? (virtualGraphsControl.value[0] ? virtualGraphsControl.value[0].db : '') : ''}}
+                  <span *ngIf="virtualGraphsControl.value?.length > 1" class="example-additional-selection">
+                      (+{{virtualGraphsControl.value.length - 1}} {{virtualGraphsControl.value?.length === 2 ? 'other' : 'others'}})
+                  </span>
+                </mat-select-trigger>
+                <mat-option *ngFor="let vGraph of dbConfig.virtualGraphs" [value]="vGraph">
+                  {{ vGraph.db }}<span class="fromDB">{{ vGraph.path }}</span>
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-divider class="divider subsection" ></mat-divider>
+        <div *ngFor="let selectedDb of selectedDBPaths; let i = index" class="selectedDBContainer">
+          <mat-form-field id="dbform">
+            <mat-label>Stardog DB</mat-label>
+              <mat-select class="dbSelected" [value]="selectedDb" (selectionChange)="selectDBPath($event.value, i)" >
+                <mat-select-trigger>
+                  {{ selectedDb.name }} <span class="instanceName">{{ selectedDb.instance }}</span>
+                </mat-select-trigger>
+                <mat-option *ngFor="let option of dbConfig.dbPaths"
+                            [value]="option" 
+                            (click)="dbConfig.fetchNamedGraphs(option)"
+                            [matTooltip]="option.dbpath" 
+                            matTooltipPosition="right">
+                    {{ option.name }} <span class="instanceName">{{ option.instance }}</span>
+                </mat-option>
+              </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Named Graph</mat-label>
+            <mat-select [value]="getSelectedNamedGraphs(selectedDb)" multiple (selectionChange)="selectNamedGraphs($event.value, selectedDb)">
+                <mat-option [value]="''">default</mat-option>
+                <mat-option *ngFor="let namedGraphs of getNamedGraphs(selectedDb)" [matTooltip]="namedGraphs" matTooltipPosition="right" [value]="namedGraphs">{{namedGraphs}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="dbControl">
+            <button mat-icon-button (click)="removeDBSelect(i)"><mat-icon>remove</mat-icon></button>
+            <button mat-icon-button (click)="addDBSelect()"><mat-icon>add</mat-icon></button>
+          </div>
+        </div>
+    </div>
+    <mat-divider class="divider" ></mat-divider>
+    <h3>Path Configuration</h3>
+    <div class="checkboxContainer">
+      <mat-checkbox [(ngModel)]="data.disableTBox" class="radioButton" >
+          Disable TBox
+      </mat-checkbox>
+      <mat-icon matTooltip="dont show paths that contain any class node" matTooltipPosition="after">info</mat-icon>
+    </div>
+    <div class="checkboxContainer">
+      <mat-checkbox [(ngModel)]="data.bidirectional" class="radioButton" >
+          Bidirectional
+      </mat-checkbox>
+      <mat-icon matTooltip="Show paths where there is no direct relation between start and end node" matTooltipPosition="after">info</mat-icon>
+    </div>
+    <div class="checkboxContainer">
+      <mat-checkbox [(ngModel)]="data.shortestPath" class="radioButton" >
+          Shortest Path
+      </mat-checkbox>
+      <mat-icon matTooltip="WARNING: Disabling this option increases the runtime. Display the shortest paths possible" matTooltipPosition="after">info</mat-icon>
+    </div>
+    <mat-divider class="divider subsection" ></mat-divider>
+    <mat-radio-group (change)="resetCheckbox()" [(ngModel)]="selectedSlider">
+      <!-- <div [class.selected]="selectedSlider === 'numPaths'">
+        <mat-label>Number of Paths</mat-label>
+        <div>
+          <mat-radio-button value="numPaths"></mat-radio-button>
+          <mat-slider (input)="updateNumPaths($event)" [disabled]="selectedSlider !== 'numPaths'" min="0" max="10" step="1" [(ngModel)]="data.numPaths" tickInterval="1"></mat-slider>
+          <span>{{ data.numPaths }}</span>
+        </div>
+      </div> -->
+      <div [class.selected]="selectedSlider === 'maxPathLength'">
+        <mat-label>Max Path Length</mat-label>
+        <div>
+          <mat-radio-button value="maxPathLength"></mat-radio-button>
+          <mat-slider (input)="updateMaxPathLength($event)" [disabled]="selectedSlider !== 'maxPathLength'" min="0" max="10" step="1" [(ngModel)]="data.maxPathLength" tickInterval="1"></mat-slider>
+          <span>{{ data.maxPathLength }}</span>
+        </div>
+      </div>
+      <div>
+        <mat-label>Path Range</mat-label>
+        <div id="rangeSliderContainer">
+          <mat-radio-button value="pathRange"></mat-radio-button>
+          <nouislider id="rangeSlider" [disabled]="selectedSlider !== 'pathRange'" [config]="rangeConfig" [(ngModel)]="data.pathRange"></nouislider>
+        </div>
+      </div>
+    </mat-radio-group>
+    <mat-divider class="divider" ></mat-divider>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onNoClick()">Close</button>
+  <button mat-button (click)="saveData()" cdkFocusInitial>Save</button>
+</div>

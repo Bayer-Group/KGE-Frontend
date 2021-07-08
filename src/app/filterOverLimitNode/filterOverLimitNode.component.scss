@@ -1,0 +1,189 @@
+@import "../../assets/scss/variables.scss";
+@import "../../assets/scss/buttons.scss";
+@import "../../assets/scss/global-container.scss";
+
+#txt_warning_nr_outgoing_nodes{
+    color: $plotButtonColor;
+    font-size: 1.2em;
+}
+
+.name-selected-node, .clear{
+    display: inline-block;
+    vertical-align: middle;
+    padding-left: 1em;
+    top: 0;
+}
+
+::ng-deep .mat-select-value-text{
+    color:white;
+}
+
+#sel_outgoing-nodes{
+    display:inline-grid;
+    margin-top: -1em;
+    grid-template-columns: 12em 12em 12em;
+    margin-left: 1em;
+    margin-bottom: 1em;
+}
+
+::ng-deep .mat-pseudo-checkbox{
+    color: white;
+}
+
+.option-outgoing-medium{
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    // justify-content: center;
+    padding-right: 2em;
+    vertical-align: middle;
+    padding-bottom: 1em;
+}
+
+.clear{
+    color: $plotButtonColor;
+}
+
+#div_setting-plot-incoming {
+    left: 0;
+    right: 0;
+    height: auto;
+    width: 60em;  
+    padding: 1em;
+    border-radius: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#div_window-bottom-part{
+    display: block;
+    flex-direction: row;
+    justify-content: left;
+}
+
+#div_window-under-part{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    color: white;
+    height: auto;
+    width: auto;
+    padding: 1em;
+    margin-top: 1em;
+    background:$background;
+    border-radius: 15px;
+}
+
+.div_selected-option{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    // justify-content: center;
+    padding-right: 2em;
+    vertical-align: middle;
+    //padding-bottom: 1em;
+    // background-color: whitesmoke;
+    // border-radius: 1em;
+}
+
+#txt_filter-title{
+    color:white;
+    margin-left: 0.89em;
+    font-size: 1.0em;
+    font-weight: bold;
+    border-bottom: 3px solid $textColor;
+    border-spacing:  1.5em 1.5em 1.5em 1.5em;
+    width: fit-content;
+    margin-top: -0.1em;
+    
+}
+
+ #div_bottom-right{
+     margin-left: 1em;
+     min-height: 16em;
+     width: auto;
+     border-radius: 15px;
+     background: $background;
+     float:right;
+     width: 39em;
+ }
+
+#div_bottom-right-upper{
+    display: flex;
+    flex-direction: row;
+    max-width: 30em;
+    padding-top: 1em;
+}
+
+
+#btn_plot-node{
+    position:sticky;
+    bottom: 11.4em;
+    left: 6em;
+}
+
+#nodeInfo_plot-info{
+    height: 12em;
+}
+
+mat-form-field {
+    width: 30em;
+    margin-left: 1em;
+}
+
+#nodeInfo {
+    background-color: $background;
+    color: $textColor;
+    border-radius: 15px;
+    float: left;
+    // width: 30%;
+    width: 20em;
+    height: 16em;
+}
+
+#nodeInfo p {
+    text-align: center;
+    font-weight: bold;
+}
+
+#lbl_node-label {
+    height: 2em;
+    border-bottom: 3px solid $textColor;
+}
+.mat-form-field {
+    width: 40em;
+    color: $textColor;
+}
+
+
+#btn_plot-outgoing-links{
+    margin-left: 3em;
+}
+
+::ng-deep .mat-list-base .mat-list-item, .mat-list-base .mat-list-option {
+    height: auto  !important;
+    padding-top: 1em;
+}
+
+::ng-deep .mat-option{
+    height: 2em !important;
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+    /*change color of label*/
+    color: $textColor !important;
+   }
+  
+   ::ng-deep.mat-form-field-underline {
+    /*change color of underline*/
+    background-color: $textColor !important;
+  } 
+  
+  ::ng-deep.mat-form-field-ripple {
+   /*change color of underline when focused*/
+   background-color: $textColor !important;;
+  }
+
+  ::ng-deep.mat-form-field-label {
+    color: $textColor !important;
+  }

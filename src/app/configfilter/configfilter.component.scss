@@ -1,0 +1,26 @@
+@import "../../assets/scss/variables.scss";
+@import "../../assets/scss/buttons.scss";
+@import "../../assets/scss/global-container.scss";
+
+#div_setting-window-color{
+    left: 40%;
+    height: 5em;
+    width: 30em;
+    flex-direction: row;
+}
+
+.wrapper {
+    display: block;
+}
+
+/**
+* additional to the .oval-button from buttons.scss
+*/
+#btn_set-color, #btn_reset{
+    width: 8em;
+    height: 3em;
+}
+
+::ng-deep .mat-select-value,  ::ng-deep .mat-select-arrow {
+    color: $textColor !important;
+}

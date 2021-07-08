@@ -1,0 +1,76 @@
+<h1 mat-dialog-title>Data Table Configurator
+    <mat-divider class="divider" ></mat-divider>
+</h1>
+<!-- @TODO compare with pathconfig -->
+<div mat-dialog-content>
+  <div *ngIf="instanceData && uriDisplayNames; else loadingData">
+    <div class="classInfo">
+      <h3>Class: {{data.nodeLabel}}</h3>
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Possible Attributes</mat-label>
+          <mat-select class="attrSelect" [formControl]="attributes" multiple>
+            <mat-option *ngFor="let attr of possibleAttributes" [matTooltip]="attr" [value]="attr">
+              {{uriDisplayNames[attr]}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="classTable">
+      <mat-table mat-table [dataSource]="currentPageData" *ngIf="!hasVirtualGraphs; else virtualGraphs">
+        <ng-container [matColumnDef]="column" *ngFor="let column of attributes.value">
+          <th class="tableHeader" mat-header-cell *matHeaderCellDef [matTooltip]="column"> 
+            <div class="tableHeaderDiv" *ngIf="!isEditMode(column)">
+              {{uriDisplayNames[column]}} 
+              <mat-icon (click)="enterEditMode(column)">edit</mat-icon>
+            </div>
+            <div class="tableHeaderDiv" *ngIf="isEditMode(column)">
+              <input matInput type="text" class="inputHeader" placeholder="{{uriDisplayNames[column]}}" [(ngModel)]="newColumnValue">
+              <mat-icon (click)="onClickSaveColumnDisplay(column)">save</mat-icon>
+            </div>
+          </th>
+          <td class="tableCell" mat-cell *matCellDef="let element"> {{element[column]}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="attributes.value"></tr>
+        <tr mat-row *matRowDef="let row; columns: attributes.value;"></tr>
+      </mat-table>
+    </div>
+    <mat-paginator *ngIf="!hasVirtualGraphs" (page)="handlePageEvent($event)" [pageIndex]="currentPage" [pageSizeOptions]="pageSizeOptions" [length]="instanceData.length" [pageSize]="pageSize"></mat-paginator>
+    <div class="classEndpoint" *ngIf="apiEndpoint">
+      <p id="p_label">Generated Endpoint:</p>
+      <input id="clipboard-example-textarea" [(ngModel)]="apiEndpoint"/>
+      <mat-icon (click)="copyEndpoint()" [matTooltip]="'Copy to Clipboard'" >file_copy</mat-icon>
+    </div>
+  </div>
+  <ng-template #loadingData>
+    <div class="loading-spinner-container">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-template>
+  <ng-template #virtualGraphs>
+    <mat-table mat-table [dataSource]="currentPageData">
+      <ng-container [matColumnDef]="column" *ngFor="let column of attributes.value">
+        <th class="tableHeader" mat-header-cell *matHeaderCellDef [matTooltip]="column"> 
+          <div class="tableHeaderDiv" *ngIf="!isEditMode(column)">
+            {{uriDisplayNames[column]}} 
+            <mat-icon (click)="enterEditMode(column)">edit</mat-icon>
+          </div>
+          <div class="tableHeaderDiv" *ngIf="isEditMode(column)">
+            <input matInput type="text" class="inputHeader" placeholder="{{uriDisplayNames[column]}}" [(ngModel)]="newColumnValue">
+            <mat-icon (click)="onClickSaveColumnDisplay(column)">save</mat-icon>
+          </div>
+        </th>
+        <td class="tableCell" mat-cell *matCellDef="let element"> {{element[column]}} </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="attributes.value"></tr>
+    </mat-table>
+    <div class="virtualgraphs">
+      <h3>No Tablepreview available due to selected virtual graphs.</h3>
+    </div>
+  </ng-template>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onClickClose()">Close</button>
+  <button mat-button cdkFocusInitial (click)="onClickSave()">Save</button>
+</div>

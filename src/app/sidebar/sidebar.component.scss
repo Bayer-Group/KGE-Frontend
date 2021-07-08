@@ -1,0 +1,117 @@
+@import "../../assets/scss/variables.scss";
+
+#div_side-bar {
+    height: 100%;
+    max-width: 100%;
+    color: $textColor;
+    word-wrap: break-word;
+}
+
+#div_sidebar-title h1 {
+    font-size: 1.6em;
+    text-align: center;
+    border-bottom: 3px solid $textColor;
+}
+
+#div_link-Visibility {
+    color: $textColor;
+}
+
+.label {
+    text-align: center;
+    font-weight: bold;
+}  
+::ng-deep .mat-icon-button{
+    color: white
+}
+::ng-deep .mat-checkbox-frame{
+    border-color: white;
+}
+::ng-deep .nodeTooltip {
+    background-color:  #00BCFF;
+    font-size: 1em;
+}
+
+#mat-tree-node-head{
+    margin: -10px -15px;
+    font-weight: bold!important;
+    //padding-bottom: 5px;
+}
+
+#mat-tree-node-data{        
+    min-height: 1px!important;
+    max-height: max-content !important;
+    margin: -5px -80px -5px;
+    //padding-top: 5px;
+}
+
+#mat-tree-info-data{
+    max-height: auto!important;
+    margin: -2px -80px 2px;
+}
+
+#mat-tree-link{
+    min-height: 5px!important;
+    max-height: 25px!important;
+}
+
+.mat-tree-node {
+    //min-height: 5px;
+    max-width: 250px;
+    color: white;
+}
+
+#div_sidebar-body {
+    height: 85%;
+    width: 99%;
+    overflow-y: auto;
+    @include scrollbars(7px, $titleBarHover, $background);
+
+}
+
+#lbl_properties-title {
+    border-bottom: 1px solid;
+    margin-bottom: 5px;
+}
+
+#div_sidebar-node-image {
+    min-width: 5em;
+    max-width: 5em;
+    margin-left: 5em;
+    background-color: $textColor;
+}
+
+#conf {
+    border-bottom: 1px solid;
+}
+
+.example-additional-selection {
+    opacity: 0.75;
+    font-size: 0.75em;
+}
+
+.example-section {
+    margin: 12px 0;
+}
+      
+.example-margin {
+    margin: 0 12px;
+}
+.mat-tree {
+    background: none !important;
+}
+li {
+    margin-top: 0;
+    margin-bottom: 0;
+    list-style-type: none;
+}
+
+ul {
+    padding-left: 0.5em;
+}
+
+.link-tree-invisible {
+    display: none;
+}
+
+      

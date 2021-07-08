@@ -1,0 +1,69 @@
+<div id="div_side-bar" *ngIf="showSidebar">
+  <div id="div_sidebar-title">
+    <h1>{{ title }} Information</h1>
+  </div>
+
+  <div id="div_sidebar-body" *ngIf="sidebarData">
+    <p class="label">{{label}}</p>
+    <img id="div_sidebar-node-image" *ngIf="hasImage" [src]="image" alt="Error loading image..">
+    <p>URI: {{uri}}</p>
+    <div id="div_sidebar-properties">
+      <p id="lbl_properties-title" class="label">Properties</p>
+      <mat-tree #tree [dataSource]="dataSourceInfo" [treeControl]="treeControllerNodeData">
+        <!-- This is the tree node template for leaf nodes -->
+        <mat-tree-node *matTreeNodeDef="let node" [matTooltip]="node.tooltip" matTooltipClass="nodeTooltip"
+          matTreeNodePadding id="mat-tree-node-data">
+          <!-- use a disabled button to provide padding for tree leaf -->
+          <button mat-icon-button disabled></button>
+          {{node.prefix+': '+ node.value }}
+        </mat-tree-node>
+        <!-- This is the tree node template for expandable nodes -->
+        <mat-tree-node *matTreeNodeDef="let node;when: hasChildNodeData" matTooltip="{{node.tooltip}}"
+          matTooltipClass="nodeTooltip" id="mat-tree-node-head" matTreeNodePadding>
+          <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle '+ node.prefix">
+            <mat-icon class="mat-icon-rtl-mirror">
+              {{treeControllerNodeData.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+            </mat-icon>
+          </button>
+          {{node.prefix}}
+        </mat-tree-node>
+      </mat-tree>
+    </div>
+  </div>
+</div>
+
+<div id="div_link-Visibility" *ngIf="showLinkVisibility && linkTreeDataSource">
+  <h1>Link Visibility</h1>
+  <mat-tree [dataSource]="linkTreeDataSource" [treeControl]="treeControl" class="semantic-tree">
+    <!-- This is the tree node template for leaf nodes -->
+    <mat-tree-node id="mat-tree-link" *matTreeNodeDef="let node" matTreeNodeToggle>
+      <li class="mat-tree-node">
+        <!-- use a disabled button to provide padding for tree leaf -->
+        <button mat-icon-button disabled></button>
+        <mat-checkbox class="semantic-tree-checkbox" [indeterminate]="false" [checked]="checkLeafNodeSelected(node)"
+          (change)="toggleLinkLeafSelection(node)">
+          {{node.label}}
+        </mat-checkbox>
+      </li>
+    </mat-tree-node>
+    <!-- This is the tree node template for expandable nodes -->
+    <mat-nested-tree-node id="mat-tree-link" *matTreeNodeDef="let node; when: hasChild">
+      <li>
+        <div class="mat-tree-node" id="mat-tree-link">
+          <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.label">
+            <mat-icon class="mat-icon-rtl-mirror">
+              {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+            </mat-icon>
+          </button>
+          <mat-checkbox class="semantic-tree-checkbox" [checked]="descendantsAllSelected(node)"
+            [indeterminate]="descendantsPartiallySelected(node)" (change)="toggleLinkSelection(node)">
+            {{node.label}}
+          </mat-checkbox>
+        </div>
+        <ul [class.link-tree-invisible]="!treeControl.isExpanded(node)">
+          <ng-container matTreeNodeOutlet></ng-container>
+        </ul>
+      </li>
+    </mat-nested-tree-node>
+  </mat-tree>
+</div>

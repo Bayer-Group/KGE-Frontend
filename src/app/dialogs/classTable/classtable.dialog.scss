@@ -1,0 +1,54 @@
+
+
+.mat-table {
+    width: 0%;
+}
+
+.tableHeader {
+    font-weight: bolder;
+    padding-top: 1em !important;
+}
+
+.tableHeaderDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: whitesmoke;
+}
+
+th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+    padding: 1em !important;
+}
+
+.classInfo {
+    display: flex;
+    justify-content: space-between;
+}
+
+.classTable {
+    overflow: auto;
+}
+
+.classEndpoint {
+    display: flex;
+    align-items: center;
+}
+
+#p_label {
+    margin-right: 1em;
+    color: green;
+    font-weight: bold;
+}
+
+.mat-header-row {
+    background-color: #0c2736;
+}
+
+.mat-select-value-text {
+    color: #0c2736;
+}
+
+.inputHeader {
+    color: whitesmoke !important;
+    border-bottom: solid;
+}

@@ -1,0 +1,48 @@
+<svg:g class="linkGroup">
+  <defs>
+    <marker class="arrow" [attr.id]="markerId" viewBox="0 -5 10 10" refX="10" refY="0" markerWidth="15"
+      markerHeight="15" orient="auto" overflow='hidden' [ngClass]="{highlight: isHighlighted}">
+      <path d="M0,-5L10,0L0,5" />
+    </marker>
+  </defs>
+  <path #textpath [attr.visibility]="false" fill='transparent' [attr.id]="linkId" stroke="none"
+    [attr.d]="linkPath(true)" />
+
+  <path [attr.visibility]="true" fill="transparent" class="path" [attr.d]="linkPath(false)"
+    [attr.marker-end]="markerUrl" [ngClass]="{highlight: isHighlighted,isType: isType}" />
+
+  <text [attr.dy]="textDy" style="font-weight: bold;" fill="black" text-anchor="middle">
+
+    <textPath [attr.xlink:href]="textPathHref" startOffset="50%" class="textPath">
+      {{ label }}
+
+    </textPath>
+  </text>
+</svg:g>
+<svg:g [attr.transform]="lineNodeTransform">
+  <circle class="lineMarker" r="5" [ngClass]="{highlight: isHighlighted}" />
+  <g class="linkButton">
+
+    <g id="linkBt_right">
+      <title>Delete Link</title>
+      <path class="menuPath" id="menuPathRight" d="
+                 M0,5
+                 A5,5 0 0,0 0,-5 
+                 L0, -20
+                 A20,20 0 0,1 0,20 Z
+                 " />
+      <image x="5.5" y="-5" width="10" height="10" href="./assets/trashNewLink.svg" />
+    </g>
+
+    <g id="linkBt_left" transform="rotate(180)">
+      <title>Hide Link</title>
+      <path class="menuPath" id="menuPathLeft" d="
+               M0,5
+               A5,5 0 0,0 0,-5 
+               L0, -20
+               A20,20 0 0,1 0,20 Z
+               " />
+      <image class="hide" x="5.5" y="-5" width="10" height="10" href="./assets/eyeNew.svg" />
+    </g>
+  </g>
+</svg:g>

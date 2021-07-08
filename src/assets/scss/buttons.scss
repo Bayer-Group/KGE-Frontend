@@ -1,0 +1,25 @@
+.oval-button {
+    margin-left: 1.5em;
+    min-width: 6em;
+    min-height: 2em;
+    background-color: $plotButtonColor;
+    border: none;
+    color: $textColor;
+    font-weight: bold;
+    border-radius: 2em;
+  }
+  
+.oval-button:hover {
+    background-color: $sliderBackColor;
+}
+
+.oval-button:focus {
+    outline: none;
+}
+
+.switch-button {
+    background-color: $titleBarHover;
+}
+.selected {
+    background-color: $textColor;
+}

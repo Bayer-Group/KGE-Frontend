@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Knowledge Graph Explorer</title>
+    <base href="/" />
+    <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap" rel="stylesheet">
+    <script>
+      //var global = global || window;//open this if you take global error
+      //var Buffer = Buffer || [];//open this if you take buffer error
+      var process = process || {
+        env: { DEBUG: undefined },
+        version: []
+      };
+    </script>
+</head>
+  <body>
+    <div id="div_index-content"><app-root></app-root></div>
+    <!-- nodeDummy important for dynamic size calculation of nodes (sizeCalculator.helper.ts) -->
+    <p id="nodeDummy" ></p>
+  </body>
+</html>

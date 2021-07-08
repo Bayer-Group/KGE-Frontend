@@ -1,0 +1,198 @@
+@import "../../assets/scss/variables.scss";
+@import "../../assets/scss/buttons.scss";
+
+.hidden{
+    display: none !important;
+}
+
+.visible{
+    display: block !important;
+}
+.mat-input-element{
+    color: white !important;    
+  }
+#div_shortest-path-input{
+    margin-right: 2em;
+    padding-bottom: 0.5em;
+}
+
+#tgl_bidirectional-search, #tgl_search-over-hidden-links, #tgl_weighted-graph{
+    width: 9em;
+    color: white;
+    display: block;
+}
+
+#div_path-toggles-navbar{
+    display:  inline-block;
+    margin-top: 0em; // TODO set a good padding/margin
+    vertical-align: middle;
+}
+
+#form_local-start-node, #form_local-destination-node{
+    display: inline-block;
+    // width: 13em;
+    height: 3em;
+    padding: 0.2em;
+}
+
+#btn_find-path{
+    display: inline-block;
+    height: 3em;
+}
+
+#div_navbar-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: $background;
+    width: 100vw;
+    height: 3.5em;
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 1em;
+}
+
+#img_bayer-logo{
+    width: 4em;
+}
+
+#img_kge{
+    height: 4em;
+    margin-left: 2em;
+}
+
+
+.clear {
+    color: red;
+    position: relative;
+    top: 0.3em;
+}
+
+
+#div_interactive-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#div_search-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 2em;
+}
+
+.singleField {
+    width: 30em !important;
+    margin-right: 1em;
+    color: $textColor;
+}
+#ff_search-field-starting, #ff_search-field-destination{
+    color: white;
+}
+.dualField {
+    width: 15em;
+    margin-right: .5em;
+    color: $textColor;
+}
+
+.nodeFieldLocal{
+    width: 13.47em;
+}
+
+#btn_plot, #btn_random-plot{
+    width: 7.2em;
+    height: 3em;
+}
+
+#div_dbcontrol-container {
+    margin-right: 1em;
+    #btn_db-settings {
+        color: $textColor;
+    }
+    #dbform {
+        width: 7em;
+        margin-right: 1em;
+        margin-left: 1em;
+    }
+}
+
+#searchSettings {
+    display: flex;
+    flex-direction: column;
+    margin-left: .9em;
+    width: 7.2em;
+    height: 3em;
+    color: whitesmoke;
+    font-size: .9em;
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+    /*change color of label*/
+    color: $textColor !important;
+}
+  
+::ng-deep.mat-form-field-underline {
+    /*change color of underline*/
+    background-color: $textColor !important;
+} 
+  
+::ng-deep.mat-form-field-ripple {
+/*change color of underline when focused*/
+background-color: $textColor !important;;
+}
+
+::ng-deep.mat-form-field-label {
+color: $textColor !important;
+}
+
+#div_search-control-container{
+    margin-right: 1em;
+    width: 14.5em;
+    #btn_plot-control-node {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+    #btn_control-path-local {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }  
+    #btn_plot-control-path {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    
+}
+
+#div_title{
+    color: $textColor;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: 400;
+}
+
+#div_running-requests {
+    display: inline;
+    color: grey;
+}
+
+.fromDB {
+  color: #bdbdbd !important;
+  font-size: .75em;
+}
+
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+.example-full-width {
+width: 100%;
+}

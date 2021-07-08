@@ -1,0 +1,16 @@
+@import "../../../../assets/scss/variables.scss";
+@import "../../../../assets/scss/global-container.scss";
+
+#div_outside-area-progress{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    #btn_abort {
+        margin-top: 2em;
+    }
+}
+
+#div_wrapper-progress{
+    display: block;
+}

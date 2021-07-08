@@ -1,0 +1,60 @@
+@import "~nouislider/distribute/nouislider.min.css";
+@import "../../../assets/scss/variables.scss";
+
+#pathInput {
+    color: black;
+    .mat-form-field {
+        margin-left: 1em;
+    }
+}
+
+.checkboxContainer {
+    display: flex;
+    flex-direction: row;
+    .mat-icon {
+        font-size: 1em;
+        margin-left: .25em;
+        cursor: pointer;
+    }
+}
+
+#rangeSliderContainer {
+    display: flex;
+    flex-direction: row;
+    margin-top: 2.25em;
+    align-items: center;
+    margin-bottom: 2em;
+    #rangeSlider {
+        width: 60%;
+        .noUi-connect {
+            background-color: $plotButtonColor;
+        }
+        .noUi-pips-horizontal {
+            height: 0;
+        }
+    }
+}
+
+.mat-radio-button {
+    margin-right: .7em;
+}
+
+.mat-divider {
+    margin-bottom: .75em !important;
+    margin-top: .75em !important;
+}
+
+.subsection {
+    width: 75%;
+}
+
+.mat-dialog-content {
+    .mat-select-value, .mat-select-arrow, .mat-form-field-underline, mat-label {
+        color: black !important;
+    }
+}
+
+.selected  .mat-slider-thumb {
+    background-color: $plotButtonColor !important;
+}
+

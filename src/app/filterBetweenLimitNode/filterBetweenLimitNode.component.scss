@@ -1,0 +1,129 @@
+@import "../../assets/scss/variables.scss";
+@import "../../assets/scss/buttons.scss";
+@import "../../assets/scss/global-container.scss";
+
+#div_setting-plot-incoming {
+    left: 0;
+    right: 0;
+    height: auto;
+    width: 60em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;    
+    border-radius: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#div_window-right-part{    
+    background-color: $background;
+    border-radius: 15px;    
+    padding: 1em;
+    margin-left: 1em;
+    width: 39em;
+}
+
+#sel_outgoing-nodes{
+    display: grid;
+    grid-template-columns: 12em 12em 12em;    
+    margin-bottom: 1em;    
+}
+
+#btn_select-all-medium{
+    
+    margin:0!important;
+    margin-right: 1.5em!important;
+}
+
+#btn_clear-all-medium{
+    margin:0!important;
+    margin-right: 1.5em!important;
+}
+
+::ng-deep .mat-pseudo-checkbox{
+    color: white;
+}
+
+.option-outgoing-medium{
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    // justify-content: center;
+    padding-right: 2em;
+    vertical-align: middle;
+    padding-bottom: 1em;
+}
+
+#tgl_select-all{
+    color: white;
+    padding-left: 1em;
+}
+
+
+mat-form-field {
+    width: 30em;
+    margin-left: 1em;
+}
+
+#nodeInfo {
+    background-color: $background;
+    color: $textColor;
+    border-radius: 15px;
+    min-width: 15em;
+    min-height: 9em;
+    width: 20em;
+    height: 9.5em;
+}
+
+#nodeInfo p {
+    text-align: center;
+    font-weight: bold;
+}
+
+#lbl_node-label {
+    height: 2em;
+    border-bottom: 3px solid $textColor;
+}
+
+.mat-form-field {
+    width: 40em;
+    color: $textColor;
+}
+
+#btn_plot-outgoing-links{
+    margin-left: 3em !important; 
+}
+
+
+::ng-deep .mat-list-item-content .mat-list-item-content-reverse{
+    padding: 0 16px 0 0 !important;
+}
+
+::ng-deep .mat-list-base .mat-list-item, .mat-list-base .mat-list-option {
+    height: auto  !important;
+    padding-top: 1em;
+}
+
+::ng-deep .mat-list-option:not{
+    margin-top: 1em;
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+    /*change color of label*/
+    color: $textColor !important;
+}
+
+::ng-deep.mat-form-field-underline {
+    /*change color of underline*/
+    background-color: $textColor !important;
+} 
+
+::ng-deep.mat-form-field-ripple {
+    /*change color of underline when focused*/
+    background-color: $textColor !important;
+}
+
+::ng-deep.mat-form-field-label {
+    color: $textColor !important;
+}

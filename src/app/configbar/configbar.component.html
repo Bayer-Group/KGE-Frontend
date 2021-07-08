@@ -1,0 +1,117 @@
+<div id="div_configbar-container" #configbar>    
+    <div id="div_control">
+        <button mat-raised-button class="switch-button" id="btn_tab-node-link" [class.selected]="isOpen && ControlMethod === 'NodeLink'" (click)="openOrCloseBar('NodeLink');" matTooltip="Configurate the NodeLink">
+            Node/Link
+        </button>
+        <button mat-raised-button class="switch-button" id="btn_tab-force" [class.selected]="isOpen && ControlMethod === 'forces'" (click)="openOrCloseBar('forces');" matTooltip="Configurate the Forces">
+            Graph Forces
+        </button>
+        <button mat-raised-button class="switch-button" id="btn_tab-graphGenerator"  [class.selected]="isOpen && ControlMethod === 'graphGenerator'" (click)="openOrCloseBar('graphGenerator');" matTooltip="Graph Generator for nquads">
+            Graph Generator
+        </button>
+        <button mat-raised-button class="switch-button" id="btn_tab-settings"  [class.selected]="isOpen && ControlMethod === 'settings'" (click)="openOrCloseBar('settings');" matTooltip="Configurate the Settings">
+            Visualization
+        </button>
+    </div>
+    
+    <div id="div_configs"> 
+        <div *ngIf="ControlMethod === 'settings'" class="settingsContainer" id="div_setting-container">
+            <div id="div_show-images-container">
+                <mat-slide-toggle id="showImageSlideToggle" [formControl]="showImage" (change)="onImageSlideToggle()"
+                    labelPosition="before">Show Images in Graph
+                </mat-slide-toggle>
+            </div>
+            <div id="div_node-weight-container">
+                <div class="innerContainer" id="div_outgoing-container">
+                    <p>outgoing</p>
+                    <div class="innerContainer" id="div_outgoing-inner-container">
+                        <mat-checkbox [(ngModel)]="outgoingSize" id="cb_outgoing-size" (change)="updateNodeConfig()">
+                            size
+                        </mat-checkbox>
+                        <mat-checkbox [(ngModel)]="outgoingColor" id="cb_outgoing-color" (change)="updateNodeConfig()">
+                            color
+                        </mat-checkbox>
+                    </div>
+                </div>
+                <div id="settings_vertical-line"></div>
+                <div class="innerContainer" id="div_incomming_container">
+                    <p>incoming</p>
+                    <div class="innerContainer" id="div_incomming-inner-container">
+                        <mat-checkbox [(ngModel)]="incomingSize" id="cb_incoming-size" (change)="updateNodeConfig()">
+                            size
+                        </mat-checkbox>
+                        <mat-checkbox [(ngModel)]="incomingColor" id="cb_incoming-color" (change)="updateNodeConfig()">
+                            color
+                        </mat-checkbox>
+                    </div>
+                </div>
+            </div>
+
+            <div id="div_dynamic-target-radio-container">
+                <p>Dynamic Target</p>
+                <mat-radio-group [(ngModel)]="dynamicTarget" (change)="updateDynamicTarget()">
+                    <mat-radio-button id="rb_dynamic-target_on" [value]="true">
+                        on
+                    </mat-radio-button>
+                    <mat-radio-button id="rb_dynamic-target_off" [value]="false">
+                        off
+                    </mat-radio-button>
+                </mat-radio-group>
+            </div>
+            <div id="div_settings-bt-container">
+                <button class="oval_button" id="btn_reset-settings" (click)="resetNodeConfig()">Reset</button>
+            </div>
+        </div>
+
+        <div *ngIf="ControlMethod === 'graphGenerator'" class = "graphGeneratorContainer" id="div_graphGenerator-container">
+            <textarea id="txta_inputGraph"  [(ngModel)]="getQuery" placeholder="Insert Nquads..."></textarea>
+            <div id="div_graphGeneratorMethode-container">
+                <mat-radio-group
+                [(ngModel)]="selectedQueryType">
+                    <mat-radio-button  *ngFor="let queryType of queryTypes" [value]="queryType">
+                        {{queryType}}
+                    </mat-radio-button>
+                </mat-radio-group>
+            </div>
+            <div id="div_settings-bt-container">
+                <button class="oval_button"  (click)="plotInput()">Plot</button>      
+            </div>      
+        </div>
+
+        <div *ngIf="ControlMethod === 'forces'" class = "forceContainer" id="div_forces-container">
+            <div id="div_simulation-stop-container">
+                <mat-slide-toggle id="tgl_stop-simulation" #toggle [formControl]="stopSimulation"
+                    (change)="onSimulationSlideToggle()" labelPosition="before">Stop the Simulation
+                </mat-slide-toggle>
+            </div>
+
+            <div id="div_charge-container">
+                <label for="slider" class="sliderlabel" id="lbl_charge">
+                    Charge
+                </label>
+                <mat-slider class="sli" id="sli_charge" [min]="config_data.charge_min" [max]='config_data.charge_max'
+                    step="10000" value="0" [formControl]='chargeValue' (change)="onChargeChange()"></mat-slider>
+            </div>
+            <div id="div_distance-container">
+                <label for="slider" class="sliderlabel" id="lbl_distance">
+                    Repel Center
+                </label>
+                <mat-slider class="sli" id="sli_distance" [min]="config_data.forceCenter_min"
+                    [max]="config_data.forceCenter_max" step="0.1" value="0" [formControl]='forceCenterValue'
+                    (change)="onForceCenterChange()"></mat-slider>
+            </div>
+
+            <div id="div_force-bt-container">
+                <button class="oval_button" id="btn_reset-force" (click)="resetForces()">Reset</button>
+            </div>
+        </div>
+
+
+        <div *ngIf="ControlMethod === 'NodeLink'" class="NodeLinkContainer" id="div_node-link-bt-container">
+            <button class="oval_button" id="btn_filter-uris" (click)="filterUris()">Color Namespaces</button>
+            <button class="oval_button" id="btn_filter-classes" (click)="filterClasses()">Color Classes</button>
+            <button class="oval_button" id="btn_hide-link-types" (click)="hideLinkTypes()">Link Types</button>
+            <button class="oval_button" id="btn_hide-node-types" (click)="hideNodeTypes()">Node Types</button>
+        </div>
+    </div>
+</div>

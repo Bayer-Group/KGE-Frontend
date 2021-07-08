@@ -1,0 +1,37 @@
+$highlighted-color: #0079a1;
+$background:#11394f; 
+$titleBarHover: #1e5675;
+$plotButtonColor: #ff4081;
+$sliderBackColor:rgba(255,64,129,.54);
+$textColor: whitesmoke;
+$searchBackground: rgba(0,0,0,0.5);
+$highlightednNode: rgba(0, 121, 161, 1);
+$highlightedNodeText-color: rgb(0,0,0);
+$baseArrowColor:grey;
+$highlightedPath: red;
+
+@mixin scrollbars($size, $foreground-color, $background-color: mix($foreground-color, white,  50%)) {
+  // For Google Chrome
+  &::-webkit-scrollbar {
+    width:  $size;
+    height: $size;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $foreground-color;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $background-color;
+  }
+
+  //For Firefox
+    scrollbar-color: $foreground-color $background-color;
+    scrollbar-width: thin;
+
+  // For Internet Explorer
+  & {
+    scrollbar-face-color: $foreground-color;
+    scrollbar-track-color: $background-color;
+  }
+}

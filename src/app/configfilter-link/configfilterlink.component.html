@@ -1,0 +1,19 @@
+<div class="wrapper" #configfilterlink>
+  <div class="outside_area" (click)="hidefilter()">
+  </div>
+  <div class="transparent-overlay-window" id="div_setting-window-color">
+    <mat-form-field>
+      <mat-label>Link Types</mat-label>
+      <mat-select [formControl]="toppings" multiple>
+        <mat-option *ngFor="let type of typeList" [value]="type">{{type}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button class="oval-button" id="btn_set-color" [(colorPicker)]="color"
+      (colorPickerChange)="updateFirestoreColor($event)">
+      hide
+    </button>
+    <button class="oval-button" id="btn_reset" (click)="resetfilter()">
+      delete
+    </button>
+  </div>
+</div>

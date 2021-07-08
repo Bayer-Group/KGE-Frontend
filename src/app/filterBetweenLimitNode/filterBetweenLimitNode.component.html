@@ -1,0 +1,33 @@
+<div class="wrapper" #searchbar>
+    <div class="outside_area" (click)="hideSearchbar()">
+    </div>
+    <div class="transparent-overlay-window" id="div_setting-plot-incoming">
+        <div id="nodeInfo" *ngIf="startNode">
+            <p id="lbl_node-label">{{ startNode.nodeLabel }}</p>
+            <p>{{getNrNewNodes()}} {{getLinkDirection()}} nodes found</p>
+            <button *ngIf="selectedURIsList.selectedOptions.selected.length>0" class="oval-button"
+                id="btn_plot-outgoing-links" type='button' mat-button (click)="filterOutgoingNodes()">
+                Plot selected {{getLinkDirection()}} nodes
+            </button>
+        </div>
+
+        <div id="div_window-right-part">
+            <button id="btn_select-all-medium" class="oval-button" (click)="selectedURIsList.selectAll()">
+                Select all
+            </button>
+            <button id="btn_clear-all-medium" class="oval-button" (click)="selectedURIsList.deselectAll()">
+                Clear all
+            </button>
+
+            <mat-selection-list #selectedURIsList id="sel_outgoing-nodes">
+                <mat-list-option class="option-outgoing-medium" *ngFor="let option of selectedOutgoingNodes"
+                    [value]="option.uri">
+                    {{option.name}}
+                </mat-list-option>
+            </mat-selection-list>
+        </div>
+
+
+
+    </div>
+</div>

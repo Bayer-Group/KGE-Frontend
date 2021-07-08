@@ -1,0 +1,10 @@
+<save-graph [graph]="graph"></save-graph>
+
+<svg #svg [attr.width]="OPTIONS.width" [attr.height]="OPTIONS.height">
+  <g [zoomableOf]="svg">
+    <g *ngFor="let link of links" [linkVisual]="link">
+    </g>
+    <g *ngFor="let node of nodes" [nodeVisualNew]="node" [draggableNode]="node" [draggableInGraph]="graph">
+    </g>
+  </g>
+</svg>

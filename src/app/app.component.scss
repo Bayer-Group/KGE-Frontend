@@ -1,0 +1,93 @@
+@import "../assets/scss/variables.scss";
+@import "../assets/scss/buttons.scss";
+
+#div_side-bar-container {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    overflow: hidden;
+    height: 100%;
+}
+
+#div_flexbox.slideTransitionClose {
+    -webkit-transition: 1s;
+    -moz-transition: 1s;
+    -ms-transition: 1s;
+    -o-transition: 1s;
+    transition: 1s;
+    left: 0em !important;
+}
+
+#div_flexbox.slideTransitionOpen {
+    -webkit-transition: 1s;
+    -moz-transition: 1s;
+    -ms-transition: 1s;
+    -o-transition: 1s;
+    transition: 1s;
+    left: 0em !important;
+}
+
+#sidebar {
+    width: 15em;
+    padding-left: 1em;
+    padding-right: 1em;
+    overflow: hidden;
+    background-color: $background;
+    transition: width .25s linear;
+}
+
+.hidden {
+    width: 0em !important;
+    padding: 0em !important;
+}
+
+#graph {
+    width: 8%;
+}
+
+#div_flexbox {
+    display: flex;
+    top: 5.5em;
+    position: fixed;
+    width: 100%;
+    height: 90%;
+}
+
+#btn_side-bar-info {
+    transform: rotate(90deg);
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+
+    // position: absolute;
+    left: -1.15em;
+    top: 6em;
+    width: 3em;
+    height: 2.25em;
+}
+#btn_side-bar-links {
+    transform: rotate(90deg);
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    // position: absolute;
+    left: -7.4em;
+    top: 12.2em;
+    width: 8em;
+    height: 2.25em;
+}
+
+
+.switch-button{
+    color: $textColor;
+}
+
+.switch-button:hover {
+    background-color: lightblue;
+    color: $background;
+}
+
+.selected{
+    background-color: white;
+    color: $background;
+}

@@ -1,0 +1,86 @@
+<div class="wrapper" #searchbar>
+    <div class="outside_area" (click)="hideSearchbar()">
+    </div>
+    <div class="transparent-overlay-window" id="div_setting-plot-incoming">
+
+        <div id="div_window-bottom-part">
+            <div id="nodeInfo" *ngIf="startNode">
+                <div id="nodeInfo_plot-info">
+                    <p id="lbl_node-label">{{startNode.nodeLabel}}</p>
+                    <p>{{ selectedOutgoingNodes.value.length }}/{{maxSelectableNodes}} {{getLinkDirection()}} nodes
+                        selected</p>
+                    <p id="txt_warning_nr_outgoing_nodes">{{getWarning()}}</p>
+                    <p>{{getOutgoingNodeCount()}} {{getLinkDirection()}} nodes found</p>
+                </div>
+                <button *ngIf="selectedOutgoingNodes.value.length>0" class="oval-button" id="btn_plot-outgoing-links"
+                    type='button' mat-button (click)="fetchAllOutgoingNodes()">
+                    Plot selected {{getLinkDirection()}} nodes
+                </button>
+
+            </div>
+
+            <div id="div_bottom-right">
+                <div id="div_bottom-right-upper">
+                    <mat-form-field class="searchinput" id="ff_autocomplete_outgoing_nodes">
+                        <input #autocompleteInput type="text" placeholder="Filter for specific outgoing node..."
+                            aria-label="Number" matInput [formControl]="searchInput" [matAutocomplete]="auto"
+                            (focus)="onAutocompleteFocusOut()">
+                        <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option *ngFor="let data of options | async" [matTooltip]="data.uri"
+                                matTooltipPosition="right" [value]="getFormattedValue(data)"
+                                (onSelectionChange)="onOptionSelect(data)"
+                                [innerHtml]="getFormattedValue(data) | highlight:searchInput.value">
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <mat-label>{{getLinkDirection()}} nodes list</mat-label>
+                        <mat-select [formControl]="selectedOutgoingNodes" multiple>
+                            <mat-select-trigger>
+                                <span *ngIf="selectedOutgoingNodes.value?.length > 0">
+                                    ({{selectedOutgoingNodes.value.length }} {{selectedOutgoingNodes.value?.length === 1
+                                    ? 'node' : 'nodes'}} selected)
+                                </span>
+                            </mat-select-trigger>
+                            <mat-option *ngFor="let option of filteredFormNodeOptions" [value]="option"
+                                (click)="onOptionAdd(option)">
+                                {{option.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+
+                <div id="div_bottom-right-lower">
+                    <p id="txt_filter-title">Filter by {{getLinkDirection()}} link type:</p>
+                    <mat-selection-list #selectedLinkURIsList id="sel_outgoing-nodes">
+                        <mat-list-option class="option-outgoing-medium" *ngFor="let option of selectedLinkTypes"
+                            [value]="option.uri" [selected]="true" (click)="onLinkTypeSelectionChange()">
+                            {{option.name}}({{option.count}})
+                        </mat-list-option>
+                    </mat-selection-list>
+                </div>
+            </div>
+
+        </div> <!-- div_bottom -->
+
+        <div id="div_window-under-part">
+            <div class="div_selected-option" *ngFor="let selected of selectedOutgoingNodes.value">
+                <div id="div_clear-selected-btn">
+                    <mat-icon id="btn_clear-selected-node" class="clear" matTooltip="Clear" aria-hidden="false"
+                        aria-label="Clear button" (click)="removeNodeOption(selected)">
+                        indeterminate_check_box
+                    </mat-icon>
+                </div>
+                <div class="name-selected-node">
+                    {{selected.name}}
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+</div>

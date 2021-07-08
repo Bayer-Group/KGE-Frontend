@@ -1,0 +1,10 @@
+<div id="div-save-container">
+    <button mat-raised-button id="btn_open-input" (click)="toggleInput()">
+        <mat-icon [class.rotatedArrow]="!(isPathEmpty || hideInput)" class="arrow">navigate_before</mat-icon>
+    </button>
+    <input #saveId id="txt_save-data-file-name" (click)="copyToClip()" [class.hiddenId]="isPathEmpty || hideInput"
+        [formControl]="path">
+    <button mat-raised-button id="btn_save-graph" matTooltip="Save graph" (click)="saveGraph()">
+        <mat-icon>save</mat-icon>
+    </button>
+</div>

@@ -1,0 +1,162 @@
+{   
+    "showAllFromStart": true,
+    "showLabelOverPicture": true,
+    "showUnlabeledNodeName" : false,
+    "graph": {
+        "node" : {
+            "data" : {
+                "showLabel": [
+                    "https://pid.bayer.com/kos/19050/hasLabel",
+                    "http://www.w3.org/2000/01/rdf-schema#label",
+                    "http://pid.bayer.com/kos/19014/fullName",
+                    "https://pid.bayer.com/kos/19050/hasNetworkedResourceLabel"
+                ]
+            },
+            "nodeImageShrinkFactor": 0.7,
+            "increaseLabelSize": false,
+            "fetchFutherOutgoingNodesForUris": [
+                "https://pid.bayer.com/kos/19050/GenericDataset",
+                "https://pid.bayer.com/kos/19050/distribution"
+            ],
+            "formatUris": {
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#": "rdf",
+                "http://www.w3.org/2000/01/rdf-schema#": "rdfs",
+                "http://www.w3.org/2001/XMLSchema#": "xsd",
+                "http://www.w3.org/2002/07/owl#": "owl"
+            },
+            "userDefinedFormatUris": {          
+                "http://pid.bayer.com/" : "bayerPID"
+            }
+        },
+        "links" : {
+            "allowList": [
+                "https://pid.bayer.com/kos/19050/isCopyOfDataset",
+                "https://pid.bayer.com/kos/19050/isDerivedFromDataset",
+                "https://pid.bayer.com/kos/19050/isSubsetOfDataset",
+                "https://pid.bayer.com/kos/19050/sameDatasetAs",
+                "https://pid.bayer.com/kos/19050/appliedToDataset",
+                "https://pid.bayer.com/kos/19050/createdFromDataset",
+                "https://pid.bayer.com/kos/19050/includesOntology",
+                "https://pid.bayer.com/kos/19050/isSchemaOfDataset",
+                "https://pid.bayer.com/kos/19050/hasLaterVersion",
+                "https://pid.bayer.com/kos/19050/distribution",
+                "https://pid.bayer.com/kos/19050/788854",
+                "https://pid.bayer.com/kos/19050/885555"
+                
+            ],
+            "negativList": [
+                "https://pid.bayer.com/kos/19050/hasHistoricVersion",
+                "https://pid.bayer.com/kos/19050/hasDistributionEndpointLifecycleStatus",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+            ],
+            "rankingList": [
+                {
+                    "k": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                    "v": 1
+                },
+                {
+                    "k": "https://pid.bayer.com/kos/19050/isCopyOfDataset",
+                    "v": 1
+                },
+                {
+                    "k": "https://pid.bayer.com/kos/19050/isDerivedFromDataset",
+                    "v": 1
+                },
+                {
+                    "k": "https://pid.bayer.com/kos/19050/isSubsetOfDataset",
+                    "v": 1
+                },
+                {
+                    "k": "https://pid.bayer.com/kos/19050/sameDatasetAs",
+                    "v": 1
+                },
+                {
+                    "k": "https://pid.bayer.com/kos/19050/appliedToDataset",
+                    "v": 1
+                },
+                {
+                    "k": "https://pid.bayer.com/kos/19050/createdFromDataset",
+                    "v": 1
+                },
+                {
+                    "k": "https://pid.bayer.com/kos/19050/includesOntology",
+                    "v": 1
+                },
+                {
+                    "k": "https://pid.bayer.com/kos/19050/isSchemaOfDataset",
+                    "v": 1
+                },
+                {
+                    "k": "https://pid.bayer.com/kos/19050/hasLaterVersion",
+                    "v": 1
+                },
+                {
+                    "k": "https://pid.bayer.com/kos/19050/distribution",
+                    "v": 2
+                },
+                {
+                    "k": "https://pid.bayer.com/kos/19050/788854",
+                    "v": 1
+                },
+                {
+                    "k": "https://pid.bayer.com/kos/19050/885555",
+                    "v": 1
+                }
+            ],
+            "minLinks": 7,
+            "maxLinks": 100
+        }
+    },
+    "customCss": [
+        {
+            "attributeName": "body",
+            "attributes": {
+                "background-image": "none",
+                "background-color": "whitesmoke"
+            }
+        },
+        {
+            "attributeName": "#ff_autocomplete_outgoing_nodes",
+            "attributes": {
+                "display": "none"
+            }
+        },
+        {
+            "attributeName": "#div_shortest-path-input",
+            "attributes": {
+                "display": "block"
+            }
+        },
+        {
+            "attributeName": "#div_index-content",
+            "attributes": {
+                "background-image": "none",
+                "background-color": "whitesmoke"
+            }
+        },
+        {
+            "attributeName": "#div_search-bar",
+            "attributes": {
+                "display": "none"
+            }
+        },
+        {
+            "attributeName": "#div_dbcontrol-container",
+            "attributes": {
+                "display": "none"
+            }
+        },
+        {
+            "attributeName": "#div_search-control-container",
+            "attributes": {
+                "display": "none"
+            }
+        },
+        {
+            "attributeName": "#div-save-container",
+            "attributes": {
+                "display": "none"
+            }
+        }
+    ]
+}

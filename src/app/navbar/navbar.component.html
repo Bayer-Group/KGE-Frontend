@@ -1,0 +1,154 @@
+<div id="div_navbar-container">
+  <div>
+    <img id="img_bayer-logo" src="/assets/logo-wht.svg" alt="Bayer">
+    <img id="img_kge" src="/assets/BAG_DAAA_KGE_Logo_white.svg" alt="Knowledge Graph Explorer">
+  </div>
+
+
+  <div id="div_interactive-container">
+    <div id="div_dbcontrol-container">
+      <button mat-icon-button id="btn_db-settings" (click)="openPlotConfigDialog()">
+        <mat-icon>settings</mat-icon>
+      </button>
+    </div>
+    <div id="div_search-control-container">
+      <button mat-raised-button id="btn_plot-control-node" class="switch-button"
+        [class.selected]="searchMethod === 'plot'" (click)="searchMethod = 'plot'"
+        matTooltip="Explore the outgoing links of a node">
+        Node
+      </button>
+      <button mat-raised-button id="btn_control-path-local" class="switch-button"
+        [class.selected]="searchMethod === 'local-path'" (click)="searchMethod = 'local-path'"
+        matTooltip="Find the path in the current graph">
+        Local Path
+      </button>
+      <button mat-raised-button id="btn_plot-control-path" class="switch-button"
+        [class.selected]="searchMethod === 'path'" (click)="searchMethod = 'path'"
+        matTooltip="Explore the path between two nodes">
+        Path
+      </button>
+    </div>
+
+    <div id="div_search-bar" [ngClass]="{hidden: searchMethod === 'local-path'}">
+      <div>
+        <mat-progress-spinner id="psp_autofill-progress" *ngIf="loadingAutocomplete" matPrefix diameter="20"
+          color="accent" mode="indeterminate"></mat-progress-spinner>
+        <mat-icon id="btn_clear-search-starting" *ngIf="isTyping()" matTooltip="Clear" class="clear" aria-hidden="false"
+          aria-label="Clear button" (click)="clearInput()">
+          close
+        </mat-icon>
+      </div>
+
+      <mat-form-field id="ff_search-field-starting" class="singleField"
+        [ngClass]="{singleField: searchMethod === 'plot', dualField: searchMethod === 'path'}">
+        <!-- placeholder="Please enter your starting Node" -->
+        <mat-label>
+          Please enter your starting Node
+          <div id="div_running-requests">
+            <span *ngFor="let running of runningRequests"> {{running }}</span>
+          </div>
+        </mat-label>
+
+        <input id="txt_search-text" type="text" aria-label="Number" matInput [formControl]="nodeInput"
+          [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-optgroup *ngFor="let g of options" [label]="g.group">
+            <mat-option class="autocompleteOption"
+              [innerHtml]="getFormattedValue(data) | highlight:nodeInput.value:data.db" *ngFor="let data of g.data"
+              [matTooltip]="data.uri" matTooltipPosition="right" [value]="getFormattedValue(data)"
+              (onSelectionChange)="setSelectedOption(data)">
+
+            </mat-option>
+          </mat-optgroup>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <mat-icon id="btn_clear-search-ending" *ngIf="isTypingPath() && searchMethod === 'path'" matTooltip="Clear"
+        class="clear" aria-hidden="false" aria-label="Clear button" (click)="clearPathInput()">
+        close
+      </mat-icon>
+
+      <mat-form-field id="ff_search-field-ending" class="dualField" *ngIf="searchMethod === 'path'">
+        <input type="text" placeholder="Please enter the ending Node" aria-label="Number" matInput
+          [formControl]="pathInput" [matAutocomplete]="autoPath">
+
+        <mat-autocomplete #autoPath="matAutocomplete">
+          <mat-optgroup *ngFor="let g of pathOptions | async" [label]="g.group">
+            <mat-option [innerHtml]="getFormattedValue(data) | highlight:pathInput.value" *ngFor="let data of g.data"
+              [matTooltip]="data.uri" matTooltipPosition="right" [value]="getFormattedValue(data)"
+              (onSelectionChange)="setSelectedPathOption(data)">
+              <!-- {{getFormattedValue(data)}} -->
+            </mat-option>
+          </mat-optgroup>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <button id="btn_plot" class="oval-button" type='button' (click)="fetchGraphData()">Plot</button>
+
+      <button id="btn_random-plot" class="oval-button" type='button' (click)="randomGraphData()">I feel Lucky</button>
+    </div>
+
+    <!-- Local shortest-path -->
+    <div id="div_shortest-path-input" [ngClass]="{visible: searchMethod === 'local-path'}">
+
+      <img id="btn_set-start" *ngIf="!shortestPathService.existsStartNode()" matTooltip="set start node"
+        src="/assets/start-white.svg" width="20em" height="20em" (click)="setNode(startNode)" alt="start">
+
+      <img id="btn_del-start" *ngIf="shortestPathService.existsStartNode()" matTooltip="clear start node"
+        src="/assets/start-white-crossed.svg" width="20em" height="20em" (click)="unsetNode(startNode)" alt="start">
+
+      <form id="form_local-start-node" class="local-input-field">
+        <mat-form-field id="ff_local-search-field-starting" class="nodeFieldLocal">
+          <input type="text" placeholder="Enter start node" aria-label="Number" (keyup.enter)="onFieldChange(startNode)"
+            matInput [formControl]="startNode" [matAutocomplete]="autoStart">
+          <mat-autocomplete #autoStart="matAutocomplete" [displayWith]="getNodeLabel">
+            <mat-option *ngFor="let option of filteredOptionsStart | async" [value]="option"
+              (click)="onFieldChange(startNode)">
+              {{option.nodeLabel}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </form>
+
+      <img id="btn_set-destination" *ngIf="!shortestPathService.existsDestinationNode()"
+        matTooltip="set destination node" src="/assets/destination-white.svg" width="20em" height="20em"
+        (click)="setNode(destinationNode)" alt="destination">
+
+      <img id="btn_reset-destination" *ngIf="shortestPathService.existsDestinationNode()"
+        matTooltip="clear destination node" src="/assets/destination-white-crossed.svg" width="20em" height="20em"
+        (click)="unsetNode(destinationNode)" alt="destination">
+
+      <form id="form_local-destination-node" class="local-input-field">
+        <mat-form-field id="ff_local-search-field-destination" class="nodeFieldLocal">
+          <input type="text" id="txt_destination-node" placeholder="Enter destination node" aria-label="Number"
+            (keyup.enter)="onFieldChange(destinationNode)" matInput [formControl]="destinationNode"
+            [matAutocomplete]="autoDestination">
+          <mat-autocomplete #autoDestination="matAutocomplete" [displayWith]="getNodeLabel">
+            <mat-option *ngFor="let option of filteredOptionsDestination | async" [value]="option"
+              (click)="onFieldChange(destinationNode)">
+              {{option.nodeLabel}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </form>
+
+      <div id="div_path-toggles-navbar">
+        <mat-slide-toggle id="tgl_bidirectional-search" class="shortest-path-toggles"
+          [formControl]="bidirectionalSearchToggle" (change)="onToggleChange(bidirectionalSearchToggle)">
+          bidirectional
+        </mat-slide-toggle>
+        <mat-slide-toggle id="tgl_search-over-hidden-links" class="shortest-path-toggles"
+          [formControl]="searchHiddenLinksToggle" (change)="onToggleChange(searchHiddenLinksToggle)">
+          hidden links
+        </mat-slide-toggle>
+        <mat-slide-toggle id="tgl_weighted-graph" class="shortest-path-toggles" [formControl]="weightedGraphToggle"
+          (change)="onToggleChange(weightedGraphToggle)">
+          weighted
+        </mat-slide-toggle>
+      </div>
+
+      <button id="btn_find-path" class="oval-button" type='button' (click)="searchShortestPath()">Search</button>
+    </div>
+
+  </div>
+</div>

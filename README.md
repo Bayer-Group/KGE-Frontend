@@ -167,7 +167,7 @@ This sections explains the use of all dialogs.
 ### plotconfig
 
 This dialog is used to configure the Plotsettings. It allows the user to set additional parameters for plotting a path between two nodes
-and set the used stardog db instance and virtual graphs.
+and set the used triplestore db instance.
 
 ## helpers
 
@@ -282,7 +282,7 @@ Please refer to the [D3-Force Dokumentation](https://github.com/d3/d3-force).
 
 ## Data Structure
 
-The D3 Frameworks needs a specific Data Structure to calculate the node and link positions. Therefore we have implemented backend-api to format the TripleStore Data from StarDog into D3 understandable Structure. Instead of triples the D3 Framework required two sets of arrays. One containing Nodes with addtional data as need, and one with Links that have source and target properties pointing to the exact array index of a specific node.
+The D3 Frameworks needs a specific Data Structure to calculate the node and link positions. Therefore we have implemented backend-api to format the TripleStore Data into D3 understandable Structure. Instead of triples the D3 Framework required two sets of arrays. One containing Nodes with addtional data as need, and one with Links that have source and target properties pointing to the exact array index of a specific node.
 
 **Example Data Structure**
 
@@ -290,7 +290,7 @@ The D3 Frameworks needs a specific Data Structure to calculate the node and link
 {
   "nodes": [
     {
-      "uri": "http://10.122.106.18:3000/Person",
+      "uri": "http://10.0.0.1:3000/Person",
       "data": {
         "label": "Person"
       }

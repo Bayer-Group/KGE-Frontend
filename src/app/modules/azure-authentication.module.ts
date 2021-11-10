@@ -36,7 +36,7 @@ export function MSALAngularConfigFactory(): MsalAngularConfiguration {
   return {
     popUp: !isIE,
     consentScopes: ["openid", "profile", "email"],
-    protectedResourceMap: new Map(),
+    protectedResourceMap: new Map(Object.entries(environment.adalConfig.protectedResourceMap)),
     unprotectedResources: [],
     extraQueryParameters: {}
   };

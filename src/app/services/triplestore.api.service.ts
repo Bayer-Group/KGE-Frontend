@@ -1,11 +1,12 @@
 import { environment } from "./../../environments/environment";
 import { Link, Node } from "../d3/models";
 import { Observable } from "rxjs";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { DBItem } from "../dialogs/plotconfig/plotconfig.dialog";
 import { PathConfigData } from "../dialogs/pathconfig/pathconfig.dialog";
 import { DBConfigRequest, VirtualGraph, DBPath } from './dbconfig.service';
+import { AuthService } from "../modules/authentication/services/auth.service";
 
 // the following interfaces are used to correctly identify the type of objects that are returned from the api calls
 export interface BindingValue {
@@ -61,8 +62,9 @@ export class TripleStoreApiService {
     public selectedVirtualGraphs = [] as VirtualGraph[];
 
     private store: string;
+    private userEmail: string;
 
-    constructor(private httpClient: HttpClient) { }
+    constructor(private httpClient: HttpClient, private _authService: AuthService) { }
 
     /**
      * Returns a http request, in which a selected uri is sent to the /outgoing route. It is used when loading the initial data.
@@ -236,7 +238,12 @@ export class TripleStoreApiService {
      * return {Observable<DBPath[]>} an observable that you can subscribe to, to receive the answer of the request
      */
     getDBPaths(): Observable<DBPath[]> {
-        return this.httpClient.get<DBPath[]>(`${environment.apis.graphData.dbpaths}`);
+        this._authService.currentEmail$.subscribe(res => {
+            this.userEmail = res
+            console.log("Current User Email ",this.userEmail)
+          });
+        let params = new HttpParams().set('user', this.userEmail);
+        return this.httpClient.get<DBPath[]>(`${environment.apis.graphData.dbpaths}`, { params: params });
     }
 
 }

@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Observable, forkJoin } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, forkJoin, of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { BackendAPIService, RequestTypeEnum } from './backend.api.service';
 import { GraphDataService } from './graphdata.service';
 import { ProfileService } from './profile.service';
 import { DBConfigRequest, DBConfigService } from './dbconfig.service';
+import { AuthService } from '../modules/authentication/services/auth.service';
 
 export class ClassTable {
     attributes: Set<string>;
@@ -19,6 +20,7 @@ export class ClassTableRequest {
     classUri: string;
     attributes: ClassTableAttributes[];
     dbConfig: DBConfigRequest[];
+    user: string;
 }
 
 export class ClassTableLabelRequest {
@@ -49,7 +51,9 @@ export class ClassTableService {
     constructor(private _graphData: GraphDataService,
         private _api: BackendAPIService,
         private _profile: ProfileService,
-        private _dbConfig: DBConfigService) { }
+        private _dbConfig: DBConfigService,
+        private _authService: AuthService) { }
+    private userEmail: string;
 
     /**
      * 
@@ -58,6 +62,7 @@ export class ClassTableService {
      */
     fetchInstanceDataFromTripleStores$(uri: string): Observable<ClassTable> {
         return this._graphData.fetchAdditionalInstancesForClass$(uri, RequestTypeEnum.INCOMING, this._profile.profileName == "colid").pipe(
+            catchError(err => of([])),
             map(res => {
                 console.log(res);
                 let result: ClassTable = {
@@ -82,9 +87,8 @@ export class ClassTableService {
                 console.log(result);
                 return result;
             })
-        );
+        )
     }
-
     /**
      * 
      * @param classUri 
@@ -119,7 +123,7 @@ export class ClassTableService {
      * @returns 
      */
     fetchClassTableData$(uri: string): Observable<ClassTable> {
-        return this.fetchInstanceDataFromTripleStores$(uri);
+        return this._graphData.fetchInstancesForClassTable$(uri);
     }
 
     /**
@@ -130,10 +134,15 @@ export class ClassTableService {
      * @returns 
      */
     save$(classUri: string, selectedAttributes: string[], attributeDisplay: { [key: string]: string }): Observable<ClassTableApiRes> {
+        this._authService.currentEmail$.subscribe(res => {
+            this.userEmail = res
+            console.log("Current User Email for ClassTable",this.userEmail)
+          });
         let request: ClassTableRequest = {
             classUri,
             attributes: [],
-            dbConfig: this._dbConfig.dbConfigRequest
+            dbConfig: this._dbConfig.dbConfigRequest,
+            user: this.userEmail,
         }
 
         selectedAttributes.forEach(attr => {

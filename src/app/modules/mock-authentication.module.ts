@@ -7,7 +7,7 @@ import { MockIdentityProvider } from './authentication/services/mock-identity-pr
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
   ],
   providers: [
     { provide: "IdentityProvider", useClass: MockIdentityProvider }

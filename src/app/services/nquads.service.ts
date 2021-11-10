@@ -39,6 +39,12 @@ export class NquadsService {
         )
     }
 
+    fetchNquadsClassTable$(baseUri: string): Observable<Nquad[]>{
+        return this.backendApi.fetchClassTableIncoming$(baseUri).pipe(
+            map(raw => this.parseNquads(raw))
+        )
+    }
+    
     fetchRandom(type: RequestTypeEnum, noVisualGraphs: boolean){
         this.backendApi.fetchRandomNode$(type ,noVisualGraphs).subscribe(raw => {          
             this.nquads = this.parseNquads(raw); 

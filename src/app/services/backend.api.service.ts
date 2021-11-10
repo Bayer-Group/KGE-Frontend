@@ -164,5 +164,18 @@ export class BackendAPIService {
     fetchVitualGraphsAttributes$(classUri: string): Observable<string[]> {
         return this.httpClient.post<string[]>(`${environment.apis.graphData.classTableVirtualGraphs}`, { uri: classUri, dbconfig: this.dbConfig.dbConfigRequest });
     }
+    fetchClassTableIncoming$(baseUri: string): Observable<string> {
 
+        let dbconfig = this.dbConfig.dbConfigRequest;
+                dbconfig.forEach((db, index) => {
+                    if (db.virtualGraphs.length > 0) dbconfig[index].virtualGraphs = [];
+                })
+            
+            let request = {
+                url: baseUri,
+                dbconfig,
+            };
+        return this.httpClient.post(`${environment.apis.graphData.classTableIncoming}`, request, { responseType: 'text' })
+
+    }
 }

@@ -51,8 +51,8 @@ import { FilterOverLimitNodeComponent } from "./filterOverLimitNode/filterOverLi
 import { FilterBetweenLimitNodeComponent } from "./filterBetweenLimitNode/filterBetweenLimitNode.component";
 import { HighlightPipe } from "./pipes/higlight.pipe";
 import { AuthenticationModule } from './modules/authentication.module';
+import { MsalInterceptor } from "@azure/msal-angular";
 import { environment } from "src/environments/environment";
-import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -107,7 +107,6 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     ClipboardModule,
     MatTreeModule,
     RouterModule.forRoot([]),
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     AuthenticationModule.forRoot(),
   ],
   entryComponents: [
@@ -118,7 +117,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     TripleStoreApiService,
     {
       provide: HTTP_INTERCEPTORS, //HTTP_INTERCEPTORS,
-      useClass: NoCacheHeadersInterceptor,
+      useClass: environment.allowAnonymous ? NoCacheHeadersInterceptor:MsalInterceptor,
       multi: true
     },
   ],

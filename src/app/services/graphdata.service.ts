@@ -6,9 +6,10 @@ import { RequestTypeEnum } from './backend.api.service';
 import { GraphNode } from '../models/graphdata/graphNode';
 import { GraphLink } from '../models/graphdata/graphLink';
 import isImageUrl from 'is-image-url';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
 import { PathConfigData } from '../dialogs/pathconfig/pathconfig.dialog';
+import { ClassTable, ClassTableData } from './classtable.service';
 
 const RDFS_TYPE = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
 @Injectable({
@@ -141,6 +142,45 @@ export class GraphDataService {
                 return nodes.filter(n => n.outgoingNodes.some(on => on.uri === baseUri && on.predicate === RDFS_TYPE))
             })
         )
+    }
+
+    /**
+     * 
+     * @param baseUri 
+     * @param type 
+     * @param isColid 
+     * @returns 
+     */
+     fetchInstancesForClassTable$(baseUri: string): Observable<ClassTable> {
+         return this.nquadsService.fetchNquadsClassTable$(baseUri).pipe(
+             catchError(err => of([])),
+             map((res) => {
+                 let nodes = this.parseToGraphData(res).nodes;
+                 nodes = nodes.filter(n => n.outgoingNodes.some(on => on.uri === baseUri && on.predicate === RDFS_TYPE));
+                 let result: ClassTable = {
+                     attributes: new Set(),
+                     data: []
+                 };
+                 nodes.forEach(n => {
+                     let tableData: ClassTableData = {
+                         uri: n.uri
+                     };
+                     n.data.forEach(d => {
+                         result.attributes.add(d.predicate);
+                         tableData[d.predicate] = d.value;
+                     });
+                     n.outgoingNodes.forEach(on => {
+                         result.attributes.add(on.predicate);
+                         tableData[on.predicate] = on.uri;
+                     });
+                     result.attributes.add("uri");
+                     result.data.push(tableData);
+                 });
+                 console.log("result from classtable",result);
+                 return result;
+             }
+             )
+         );
     }
 
     /**
